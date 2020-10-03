@@ -1,6 +1,8 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { Navbar } from './Navbar/Navbar';
 import { Stories } from './Stories/Stories';
+import { CommentsByTime } from './Comments By Time/CommentsByTime';
 //import './HackerNewsApp.css';
 
 function HackerNewsApp() {
@@ -10,7 +12,14 @@ function HackerNewsApp() {
                 <Navbar />
             </header>
                 <main>
-                    <Stories />
+                    <Switch>
+                        <Route exact path='/'>
+                            <Stories />
+                        </Route>
+                        <Route path='/comments'>
+                            <CommentsByTime />
+                        </Route>
+                    </Switch>
                 </main>
             <footer>
             </footer>

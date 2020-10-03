@@ -8,9 +8,7 @@ export function StoryComment() {
             <div>
                 <UserAndTimeAgo />
             </div>
-            <div>
-                <Text />
-            </div>
+            <Text />
         </div>
     )
 }
