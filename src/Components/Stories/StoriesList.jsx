@@ -1,13 +1,11 @@
 import React from 'react';
 import  { Story } from './Story';
 
-export function StoriesList(props) {
-
-    const fakeStoriesArr = Array.from({length: 30}, (v, i) => i + 1);
+export function StoriesList({storiesArr}) {
     
-    const storiesList = fakeStoriesArr.map((v, i) => 
-        <li key={i}>
-            <Story  />
+    const storiesList = storiesArr.map(story => 
+        <li key={story.id}>
+            <Story storyObj={story} />
         </li>
     )
     return (

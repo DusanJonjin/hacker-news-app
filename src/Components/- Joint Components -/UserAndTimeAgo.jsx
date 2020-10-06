@@ -1,6 +1,10 @@
 import React from 'react';
+import { calculateTimeAgo } from '../../Utilities/functions';
 
-export function UserAndTimeAgo({ user='ja', timeAgo='1s ago' }) {
+export function UserAndTimeAgo({ user, time }) {
+
+    const timeAgo = calculateTimeAgo(time);
+    
     return (
         <React.Fragment>
             <p>

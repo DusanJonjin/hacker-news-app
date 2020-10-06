@@ -1,8 +1,7 @@
 import React from 'react'
 
-export function WebsiteImg({ websiteUrl }) {
+export function WebsiteImg({ url, urlShort }) {
 
-    const { url, urlShort } = websiteUrl;
 
     return (
         <iframe src={url}

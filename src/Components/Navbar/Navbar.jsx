@@ -1,13 +1,15 @@
 import React from 'react';
+import { navLinksArr } from '../../Utilities/miscData';
+import { Link } from 'react-router-dom';
 
 export function Navbar(props) {
 
-    const navLinksArr = ['Top stories', 'New stories', 'Comments'];
-
-    const navLinks = navLinksArr.map(navLink => 
-        <li>
-            {navLink}
-        </li>
+    const navLinks = navLinksArr.map((navLink, i) => 
+        <Link key={i} to={{pathname: navLink.path}}>
+            <li>
+                {navLink.name}
+            </li>
+        </Link>
     );
 
     return (

@@ -7,18 +7,36 @@ import {
     CommentsCount,
     WebsiteImg
 } from '../- Joint Components -/AllJointComponents';
+import { handleLongUrl } from '../../Utilities/functions';
 
-export function Story() {
+export function Story({ storyObj }) {
+
+    const {
+        by,
+        descendants,
+        score,
+        time,
+        title,
+        url
+    } = storyObj
+
+    const urlShort = handleLongUrl(url);
+
     return (
         <article>
             <div>
-                <Title />
-                <WebsiteUrlShort />
+                <Title storyUrl={url}
+                        title={title}/>
+                <WebsiteUrlShort urlShort={urlShort} />
+                <WebsiteImg url={url}
+                            urlShort={urlShort}
+                />
             </div> 
             <div>
-                <Score />
-                <UserAndTimeAgo />
-                <CommentsCount />
+                <Score score={score}/>
+                <UserAndTimeAgo user={by}
+                                time={time}/>
+                <CommentsCount descendants={descendants}/>
             </div>
             
         </article>
