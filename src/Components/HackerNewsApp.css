@@ -11,3 +11,17 @@ main {
     margin: 0 10px;
     font-family: 'Tahoma', sans-serif;
 }
+
+.app-footer {
+    font-family: 'Verdana', sans-serif;
+    text-align: center;
+    padding: 0 0 2em 0;
+    font-size: 15px;
+    font-style: italic;
+    color: rgb(75, 75, 75);
+    transition: color .5s ease;
+}
+
+.foot-dark {
+    color: rgb(125, 125, 125)
+}

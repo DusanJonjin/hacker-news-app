@@ -1,7 +1,7 @@
 .story, .fake-story {
     background: rgb(191, 227, 245);
     border-radius: 10px;
-    border: 1px solid rgb(190, 196, 201);
+    border: 1px solid rgb(198, 204, 209);
     padding: 0 10px;
     transition: .5s ease;
 }

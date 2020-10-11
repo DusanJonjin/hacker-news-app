@@ -12,7 +12,7 @@ export function StoriesList({storiesArr}) {
         </li>
     )
     return (
-        <ol>
+        <ol className='stories-ol'>
             {storiesList}
         </ol>
     );

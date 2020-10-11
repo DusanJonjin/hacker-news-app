@@ -40,8 +40,8 @@ function HackerNewsApp() {
                     </Switch>
                 }
             </main>
-            <footer className='app-footer'>
-                © Hacker News App by D.J.
+            <footer className={`app-footer ${darkTheme ? 'foot-dark' : ''}`}>
+            © {new Date().getFullYear().toString()}. Hacker News App by D.J.
             </footer>
         </div>
     );

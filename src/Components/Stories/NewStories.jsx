@@ -9,34 +9,71 @@ export function NewStories() {
 
     const [storiesData, setStoriesData] = useState({status: 'isLoading'});
 
+    const [pageNum, setPageNum] = useState(1);
+
+    const [storiesPerPage, setStoriesPerPage] = useState(30);
+
+    const handleSelectPageNum = num => {
+        setPageNum(num)
+        setStoriesData({status: 'isLoading'})
+    };
+
     const isMounted = useRef(true);
 
+    const abortController = new AbortController();
+
+    const abortSignal = abortController.signal;
+
     useEffect(() => {
-        const abortController = new AbortController();
-        const abortSignal = abortController.signal;
-        getStories('newstories', abortSignal).then(res => 
-            isMounted.current && setStoriesData(res)
-        );
         return () => {
             isMounted.current = false;
             abortController.abort();
         }
-    }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pageNum]);
 
-    const { storiesArr } = storiesData;
+    useEffect(() => {
+        getStories(
+            'newstories', 
+            abortSignal, 
+            pageNum, 
+            storiesPerPage
+        ).then(res => 
+            setStoriesData(res)
+        );      
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pageNum]);
+
+    const { storiesArr, storiesCount, status } = storiesData;
+
+    const disablePagination = status === 'isLoading';
 
     return (
         <section className='stories'>
             {
                 {
-                    'isLoading': <FakeStoriesList />,
-                    'error': <p>Network error. Please try again later.</p>,
+                    'isLoading': 
+                        <React.Fragment>
+                            <FakeStoriesList />
+                            <Pagination 
+                                pageNum={pageNum}
+                                storiesPerPage={storiesPerPage}
+                                disablePagination={disablePagination}
+                            />
+                        </React.Fragment>,
+                    'error': <p className='error'>Network error. Please try again later.</p>,
                     'isLoaded': 
                         <React.Fragment>
                             <StoriesList storiesArr={storiesArr}/>
-                            <Pagination />
+                            <Pagination 
+                                pageNum={pageNum}
+                                storiesCount={storiesCount}
+                                handleSelectPageNum={handleSelectPageNum} 
+                                storiesPerPage={storiesPerPage}
+                                disablePagination={disablePagination}
+                            />
                         </React.Fragment>
-                }[storiesData.status]  
+                }[status]  
             }
         </section>
     )

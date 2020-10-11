@@ -20,12 +20,15 @@ export const getStoriesIDs = async (storiesName, abortSignal) =>  {
 }
 
 
-export const getStories = async (storiesName, abortSignal) => {
+export const getStories = async (storiesName, abortSignal, pageNum, storiesPerPage) => {
     
     try {
         const storiesIDsArr = await getStoriesIDs(storiesName, abortSignal);
-        const getSlicedStories = storiesIDsArr.slice(0, 30).map(async storyID =>
-             await getItem(storyID, abortSignal)
+        const storiesToNum = pageNum * storiesPerPage;
+        const storiesFromNum = storiesToNum - storiesPerPage;
+        const getSlicedStories = storiesIDsArr.slice(
+            storiesFromNum, storiesToNum).map(async storyID =>
+                await getItem(storyID, abortSignal)
         );
         //Let array of promises be only one promise:
         const allStories = await Promise.all(getSlicedStories);
@@ -40,6 +43,7 @@ export const getStories = async (storiesName, abortSignal) => {
     }
 
     catch (err) {
+        if (err.name === 'AbortError') return {status: 'isLoading'};
         return {status: 'error'};
     }
 };
