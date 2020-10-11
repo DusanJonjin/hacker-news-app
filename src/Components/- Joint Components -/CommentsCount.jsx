@@ -1,19 +1,21 @@
 import React from 'react'
 
-export function CommentsCount({ descendants }) {
+export function CommentsCount({ descendants, darkTheme }) {
 
     if (descendants < 1) return (
-        <p>no comments</p>
+        <p className={`no-comments ${darkTheme ? 'dark-no-comments' : ''}`}>
+            no comments
+        </p>
     );
 
     if (descendants === 1) return (
-        <p>
+        <p className={`comments-exist ${darkTheme ? 'dark-comments-exist' : ''}`}>
             {`${descendants} comment`}
         </p>
     );
 
     return (
-        <p>
+        <p className={`comments-exist ${darkTheme ? 'dark-comments-exist' : ''}`} >
            {`${descendants} comments`}
         </p>
     );

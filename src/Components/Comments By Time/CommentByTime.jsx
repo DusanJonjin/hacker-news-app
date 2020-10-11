@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
-    UserAndTimeAgo,
+    User,
+    TimeAgo,
     Title,
     Text 
 } from '../- Joint Components -/AllJointComponents';
@@ -10,7 +11,8 @@ export function CommentByTime() {
     return (
         <div>
             <div>
-                <UserAndTimeAgo />
+                <User />
+                <TimeAgo />
                  on: <Title />
             </div>
             <Text />

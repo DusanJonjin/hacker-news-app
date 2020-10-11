@@ -1,10 +1,10 @@
 import React from 'react';
 
-export function WebsiteUrlShort({ urlShort }) {
+export function WebsiteUrlShort({ urlShort, darkTheme }) {
 
     return (
-        <p>
-            ({urlShort})
+        <p className={`short-url ${darkTheme ? 'dark-short-url' : ''}`}>
+            {urlShort}
         </p>
     );
 }

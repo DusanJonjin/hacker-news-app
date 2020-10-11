@@ -1,0 +1,145 @@
+.story, .fake-story {
+    background: rgb(191, 227, 245);
+    border-radius: 10px;
+    border: 1px solid rgb(190, 196, 201);
+    padding: 0 10px;
+    transition: .5s ease;
+}
+
+.dark-story {
+    background: rgb(52, 52, 54);
+    border: 1px solid rgb(65, 65, 65);
+}
+
+/* story title link and short url part*/
+.story-top-wrap {
+    background: rgb(233, 248, 255);
+    border-radius: 7px;
+    margin-top: 15px;
+    padding: 10px;
+    word-wrap: break-word;
+    transition: .5s ease;
+}
+
+.story-top-wrap > p {
+    font-size: 15px;
+}
+
+.top-wrap-dark {
+    background: rgb(70, 70, 72);
+}
+
+.story-top-wrap > h2 {
+    font-size: 19px;
+    margin: 0;
+}
+
+.title-link {
+   text-decoration: none;
+   color: rgb(1, 29, 185);
+   transition: .3s ease;
+}
+
+.title-link:hover {
+    color: rgb(57, 86, 247);
+}
+
+.dark-link {
+    color: rgb(91, 167, 255);
+}
+
+.dark-link:hover {
+    color: rgb(35, 137, 255);
+}
+
+.short-url {
+    font-size: 17px;
+    margin: 10px 0 0 0;
+    font-weight: bold;
+    color: rgb(75, 75, 78);
+    transition: .5s ease;
+}
+
+.dark-short-url {
+    color: rgb(215, 215, 217)
+}
+/* end of story title link and short url part*/
+
+
+/* story score, user, comments part*/
+.story-bottom-wrap {
+    font-family: 'Calibri', sans-serif;
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    color: black;
+    transition: .5s ease;
+}
+
+.bot-wrap-dark {
+    color: rgb(245, 245, 247);
+}
+
+.small-wrap-one, .small-wrap-two {
+    display: flex;
+    align-items: center;
+}
+
+.small-wrap-one > p, .small-wrap-two > p {
+    margin: 8px 0 5px 0;
+}
+
+.no-comments {
+    color: rgb(110, 110, 110);
+    transition: .5s ease;
+}
+
+.dark-no-comments {
+    color: rgb(130, 130, 130);
+}
+
+.comments-exist {
+    color: rgb(212, 62, 2);
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.comments-exist:hover{
+    color: rgb(252, 108, 72);
+}
+
+.dark-comments-exist {
+    color: rgb(253, 169, 148);
+}
+
+.dark-comments-exist:hover {
+    color: rgb(255, 128, 96);
+}
+/* end of story score, user, comments part*/
+
+
+@media only screen and (min-width: 1344px) {
+
+    .story-top-wrap > h2 {
+        height: 55px;
+        font-size: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .story-top-wrap > p {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .story-bottom-wrap {
+        flex-direction: row;
+    }
+
+    .small-wrap-one::after {
+        /*2002 is unicode for two white spaces (same as &ensp;)*/
+        content: '\2002|\2002';
+    }
+}
+

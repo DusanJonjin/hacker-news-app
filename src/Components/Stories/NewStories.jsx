@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StoriesList } from './StoriesList';
 import { Pagination } from './Pagination';
 import { FakeStoriesList } from '../- Placeholder Components -/FakeStoriesList';
 import { getStories } from '../../Api Calls/apiCalls';
+import './Styles/Stories.css';
 
 export function NewStories() {
 
-    const [storiesData, setStoriesData] = useState({message: 'isLoading'});
+    const [storiesData, setStoriesData] = useState({status: 'isLoading'});
+
+    const isMounted = useRef(true);
 
     useEffect(() => {
-        getStories('newstories')
-            .then(res => 
-                setStoriesData(res)
-            )
+        const abortController = new AbortController();
+        const abortSignal = abortController.signal;
+        getStories('newstories', abortSignal).then(res => 
+            isMounted.current && setStoriesData(res)
+        );
+        return () => {
+            isMounted.current = false;
+            abortController.abort();
+        }
     }, []);
 
     const { storiesArr } = storiesData;
@@ -28,7 +36,7 @@ export function NewStories() {
                             <StoriesList storiesArr={storiesArr}/>
                             <Pagination />
                         </React.Fragment>
-                }[storiesData.message]  
+                }[storiesData.status]  
             }
         </section>
     )

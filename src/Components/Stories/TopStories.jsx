@@ -1,18 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StoriesList } from './StoriesList';
 import { Pagination } from './Pagination';
 import { FakeStoriesList } from '../- Placeholder Components -/FakeStoriesList';
 import { getStories } from '../../Api Calls/apiCalls';
+import './Styles/Stories.css';
 
 export function TopStories() {
 
-    const [storiesData, setStoriesData] = useState({message: 'isLoading'});
+    const [storiesData, setStoriesData] = useState({status: 'isLoading'});
 
+    /*Use this variable to prevent setting state on unmounted component, which
+    happens when a user quickly clicks on different links on the navbar :*/
+    const isMounted = useRef(true);
+
+    /*If the component is unmounted before getStories function gets its data,
+    we abort fetching data with Abort controler, also preventing state update: */ 
     useEffect(() => {
-        getStories('topstories')
-            .then(res => 
-                setStoriesData(res)
-            )
+        const abortController = new AbortController();
+        const abortSignal = abortController.signal;
+        getStories('topstories', abortSignal).then(res => 
+            isMounted.current && setStoriesData(res)
+        );      
+        return () => {
+            isMounted.current = false;
+            abortController.abort();
+        }
     }, [])
 
     const { storiesArr } = storiesData;
@@ -22,13 +34,13 @@ export function TopStories() {
             {
                 {
                     'isLoading': <FakeStoriesList />,
-                    'error': <p>Network error. Please try again later.</p>,
+                    'error': <p className='error'>Network error. Please try again later.</p>,
                     'isLoaded': 
                         <React.Fragment>
                             <StoriesList storiesArr={storiesArr}/>
                             <Pagination />
                         </React.Fragment>
-                }[storiesData.message]  
+                }[storiesData.status]  
             }
         </section>
     )

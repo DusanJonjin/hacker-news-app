@@ -1,0 +1,13 @@
+.app-wrapper {
+    background-color: rgb(243, 243, 245);
+    transition: background-color .5s ease;
+}
+
+.app-dark {
+    background-color: rgb(32, 32, 33);
+}
+
+main {
+    margin: 0 10px;
+    font-family: 'Tahoma', sans-serif;
+}

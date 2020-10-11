@@ -13,7 +13,7 @@ export function FakeStoriesList() {
     );
 
     return (
-        <ul>
+        <ul className='fake-stories-ul'>
             {fakeStoriesList}
         </ul>
     )
