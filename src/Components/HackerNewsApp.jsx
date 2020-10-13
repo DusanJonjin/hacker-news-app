@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { Header } from './Header/Header';
-import { TopStories } from './Stories/TopStories';
-import { NewStories } from './Stories/NewStories';
+import { Stories } from './Stories/Stories';
 import { CommentsByTime } from './Comments By Time/CommentsByTime';
 import { DarkThemeContext } from '../Context/DarkThemeContext'
 import { Route, Switch } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { navLinksArr } from '../Utilities/miscData';
+import { navLinksDataArr } from '../Utilities/miscData';
 import './HackerNewsApp.css';
 
 function HackerNewsApp() {
@@ -16,10 +15,25 @@ function HackerNewsApp() {
     const { pathname } = useLocation();
 
     // Get array of all existing pathnames:
-    const allPathnames = navLinksArr.map(navLink => navLink.path);
+    const allPathnames = navLinksDataArr.map(navLink => navLink.path);
 
     //If URL pathname doesn't exist or it is not correct:
     const isWrongUrl = !allPathnames.includes(pathname);
+
+    /* Make an Route array of Stories components only. This way the component unmounts
+    every time the Route is changed. If we simply put the same component with
+    different paths inside Switch, that component will not unmount on Route change
+    between them, it will always be mounted but with different props: */
+    const storiesRoutes = navLinksDataArr.reduce((acc, navLink, i) => 
+        navLink.name !== 'Comments' ?
+            [
+                ...acc,
+                <Route key={i} exact={navLink.path === '/'} path={navLink.path}>
+                    <Stories storiesApiName={navLink.api} />
+                </Route>
+            ]
+          : acc
+    , []);
     
     return (
         <div className={`app-wrapper ${darkTheme ? 'app-dark' : ''}`}>
@@ -28,12 +42,7 @@ function HackerNewsApp() {
                 {isWrongUrl ? 
                     <p>Wrong turn!</p>
                     : <Switch>
-                        <Route exact path='/'>
-                            <TopStories />
-                        </Route>
-                        <Route path='/new_stories'>
-                            <NewStories />
-                        </Route>
+                        {storiesRoutes}
                         <Route path='/comments'>
                             <CommentsByTime />
                         </Route>

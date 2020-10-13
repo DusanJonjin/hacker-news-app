@@ -2,7 +2,7 @@ import React from 'react'
 
 export function CommentsCount({ descendants, darkTheme }) {
 
-    if (descendants < 1) return (
+    if (descendants < 1 || !descendants) return (
         <p className={`no-comments ${darkTheme ? 'dark-no-comments' : ''}`}>
             no comments
         </p>

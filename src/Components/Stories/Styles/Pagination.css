@@ -29,10 +29,10 @@
     text-align: center;
     margin: 5px 2px;
     cursor: pointer;
+    transition: background .3s ease;
 }
 
 .pagin-numbers:hover {
-    transition: background .2s ease;
     background:  rgb(125, 194, 250);
 }
 

@@ -10,9 +10,9 @@ export const getItem = async (itemID, abortSignal) => {
 };
 
 // Async function to get all top stories or new stories id's in array:
-export const getStoriesIDs = async (storiesName, abortSignal) =>  {
+export const getStoriesIDs = async (storiesApiName, abortSignal) =>  {
     const fetchStoriesIDs = await fetch(
-        `https://hacker-news.firebaseio.com/v0/${storiesName}.json?print=pretty`,
+        `https://hacker-news.firebaseio.com/v0/${storiesApiName}.json?print=pretty`,
         {signal: abortSignal}
     );
     const storiesIDsArray = await fetchStoriesIDs.json();
@@ -20,10 +20,10 @@ export const getStoriesIDs = async (storiesName, abortSignal) =>  {
 }
 
 
-export const getStories = async (storiesName, abortSignal, pageNum, storiesPerPage) => {
+export const getStories = async (storiesApiName, abortSignal, pageNum, storiesPerPage) => {
     
     try {
-        const storiesIDsArr = await getStoriesIDs(storiesName, abortSignal);
+        const storiesIDsArr = await getStoriesIDs(storiesApiName, abortSignal);
         const storiesToNum = pageNum * storiesPerPage;
         const storiesFromNum = storiesToNum - storiesPerPage;
         const getSlicedStories = storiesIDsArr.slice(

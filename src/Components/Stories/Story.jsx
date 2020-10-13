@@ -11,7 +11,7 @@ import { handleLongUrl } from '../../Utilities/functions';
 import { DarkThemeContext } from '../../Context/DarkThemeContext';
 import './Styles/Story.css'
 
-export function Story({ storyObj }) {
+export function Story({ storyObj, storyNum }) {
 
     const { darkTheme } = useContext(DarkThemeContext);
 
@@ -28,8 +28,12 @@ export function Story({ storyObj }) {
 
     return (
         <article className={`story ${darkTheme ? 'dark-story' : ''}`}>
+            <p className={`story-num ${darkTheme ? 'dark-story-num' : ''}`}>
+                {storyNum}
+            </p>
             <div className={`story-top-wrap ${darkTheme ? 'top-wrap-dark' : ''}`}>
                 <Title 
+                    storyNum={storyNum}
                     storyUrl={url}
                     title={title}
                     darkTheme={darkTheme}

@@ -5,44 +5,54 @@ import { FakeStoriesList } from '../- Placeholder Components -/FakeStoriesList';
 import { getStories } from '../../Api Calls/apiCalls';
 import './Styles/Stories.css';
 
-export function NewStories() {
+export function Stories({ storiesApiName }) {
 
-    const [storiesData, setStoriesData] = useState({status: 'isLoading'});
+    const initialStoriesData = {status: 'isLoading'}
+
+    const [storiesData, setStoriesData] = useState(initialStoriesData);
 
     const [pageNum, setPageNum] = useState(1);
 
-    const [storiesPerPage, setStoriesPerPage] = useState(30);
+    const [storiesPerPage, setStoriesPerPage] = useState(20);
 
     const handleSelectPageNum = num => {
-        setPageNum(num)
-        setStoriesData({status: 'isLoading'})
+        setPageNum(num);
     };
 
+    /*Use this variable to prevent setting state on unmounted component, which
+    happens when a user quickly clicks on different links on the navbar :*/
     const isMounted = useRef(true);
 
+    /*If the component is unmounted before getStories function gets its data,
+    we abort fetching data with Abort controler, also preventing state update: */ 
     const abortController = new AbortController();
 
     const abortSignal = abortController.signal;
 
     useEffect(() => {
         return () => {
-            isMounted.current = false;
             abortController.abort();
+            isMounted.current = false;
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pageNum]);
+    }, []);
 
     useEffect(() => {
+        setStoriesData(initialStoriesData);
         getStories(
-            'newstories', 
+            storiesApiName, 
             abortSignal, 
             pageNum, 
             storiesPerPage
         ).then(res => 
-            setStoriesData(res)
-        );      
+            isMounted.current && setStoriesData(res)
+        ); 
+        // If user quickly clicks on a paginate button and then some nav link:
+         return () => {
+            abortController.abort();
+        }     
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pageNum]);
+    }, [pageNum, storiesApiName]);
 
     const { storiesArr, storiesCount, status } = storiesData;
 
@@ -64,7 +74,11 @@ export function NewStories() {
                     'error': <p className='error'>Network error. Please try again later.</p>,
                     'isLoaded': 
                         <React.Fragment>
-                            <StoriesList storiesArr={storiesArr}/>
+                            <StoriesList 
+                                storiesArr={storiesArr}
+                                pageNum={pageNum}
+                                storiesPerPage={storiesPerPage}
+                            />
                             <Pagination 
                                 pageNum={pageNum}
                                 storiesCount={storiesCount}
