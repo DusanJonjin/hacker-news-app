@@ -1,0 +1,57 @@
+.story-comment {
+    background-color:rgb(236, 249, 255);
+    border: 1px solid rgb(193, 201, 204);
+    border-radius: 10px;
+    margin: 0 6px 8px 0; 
+    padding: 0 10px;
+}
+
+.story-comment-top-wrap {
+    display: flex;
+    color: rgb(128, 141, 145);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 0 12px 0;
+}
+   
+.story-comment-top-wrap p {
+   margin: 0;
+}
+
+.story-comment-bot-wrap > p {
+    margin:0;
+}
+
+.story-comment-bot-wrap {
+    padding-bottom: 12px;
+
+}
+
+.story-comment-bot-wrap * {
+    font-size: 16px;
+    line-height: 1.3em;
+    word-wrap: break-all;
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 1340px) {
+
+    .story-comment {
+        margin: 0 15px 10px 0;
+    }
+
+    .story-comment-top-wrap {
+        font-size: 15px;
+        padding: 13px 0 13px 0;
+    }
+
+    .story-comment-bot-wrap * {
+        font-size: 17px;
+    }
+
+    .story-comment-bot-wrap {
+        padding-bottom: 13px;
+
+    }
+
+}

@@ -1,0 +1,38 @@
+.story-comments-wrap {
+    max-width: 1350px;
+    margin: 0 auto;
+}
+
+.back-link {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 5px;
+    padding: 17px 0;
+}
+
+.back-link > * {
+    color: rgb(255, 42, 14);
+}
+
+.details-comments-wrap {
+    background-color: rgb(194, 236, 255);
+    padding-bottom: 1em;
+}
+
+.details-comments-wrap > .comments-exist {
+    font-size: 22px;
+    font-weight: bold;
+    color: rgb(71, 102, 131);
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+    background-color: rgb(194, 236, 255);
+}
+
+.fake-story-comm-details {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    height: 150px;
+    background-color: rgb(148, 230, 255);
+}

@@ -1,6 +1,6 @@
 .stories-ol, .fake-stories-ul {
     max-width: 1500px;
-    margin: 0 auto;
+    margin: 1.5em auto 0 auto;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 650px));

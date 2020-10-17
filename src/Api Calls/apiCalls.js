@@ -20,8 +20,23 @@ export const getStoriesIDs = async (storiesApiName, abortSignal) =>  {
 }
 
 
+export const getStory = async storyID => {
+    try {
+        const fetchedStory = await getItem(storyID);
+        const storyObj = {
+            status: 'storyLoaded',
+            story: fetchedStory
+        }
+        return storyObj;
+    }
+
+    catch(err) {
+        return {status: 'error'}
+    }
+};
+
+
 export const getStories = async (storiesApiName, abortSignal, pageNum, storiesPerPage) => {
-    
     try {
         const storiesIDsArr = await getStoriesIDs(storiesApiName, abortSignal);
         const storiesToNum = pageNum * storiesPerPage;
@@ -32,7 +47,7 @@ export const getStories = async (storiesApiName, abortSignal, pageNum, storiesPe
         );
         //Let array of promises be only one promise:
         const allStories = await Promise.all(getSlicedStories);
-        //eliminate null or undefined values from array:
+        //Eliminate null or undefined values from array:
         const existingStories = allStories.filter(story => story);
         const storiesObject = {
             status: 'isLoaded', 
@@ -44,6 +59,34 @@ export const getStories = async (storiesApiName, abortSignal, pageNum, storiesPe
 
     catch (err) {
         if (err.name === 'AbortError') return {status: 'isLoading'};
+        return {status: 'error'};
+    }
+};
+
+
+export const getStoryComments = async (storyKids, abortSignal) => {
+    try {
+        if (!storyKids || storyKids === []) return [];
+        const fetchAllComments = storyKids.map(async commentID => {
+            const comment = await getItem(commentID, abortSignal);
+            if (!comment) return null;
+            //Do a recursion to get all deeply nested comments (replies):
+            const comments = await getStoryComments(comment.kids, abortSignal);
+            const commentObj = {
+                ...comment,
+                comments: comments
+            };
+            return commentObj;
+        })
+        const allCommentsResult = await Promise.all(fetchAllComments);
+        //Filter out all badly formatted or unexisting comments:
+        const filteredComments = allCommentsResult.filter(comment => 
+            comment && !comment.dead && !comment.deleted
+        );
+        return filteredComments;
+    }
+
+    catch(err) {
         return {status: 'error'};
     }
 };

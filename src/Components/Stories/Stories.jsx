@@ -2,10 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StoriesList } from './StoriesList';
 import { Pagination } from './Pagination';
 import { FakeStoriesList } from '../- Placeholder Components -/FakeStoriesList';
+import { StoryComments } from './StoryComments';
 import { getStories } from '../../Api Calls/apiCalls';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import './Styles/Stories.css';
 
 export function Stories({ storiesApiName }) {
+
+    const { path } = useRouteMatch();
 
     const initialStoriesData = {status: 'isLoading'}
 
@@ -15,8 +19,19 @@ export function Stories({ storiesApiName }) {
 
     const [storiesPerPage, setStoriesPerPage] = useState(20);
 
+    // Initial array of numbers for middle paginate buttons:
+    const [midBtnsArr, setMidBtnsArr] = useState(
+        Array.from(
+            {length: 5}, (v ,i) => i + 2
+        )
+    );
+
     const handleSelectPageNum = num => {
         setPageNum(num);
+    };
+
+    const handleMidBtnsArr = array => {
+        setMidBtnsArr(array)
     };
 
     /*Use this variable to prevent setting state on unmounted component, which
@@ -29,6 +44,7 @@ export function Stories({ storiesApiName }) {
 
     const abortSignal = abortController.signal;
 
+    // If a user quickly clicks or navigates between navbar links:
     useEffect(() => {
         return () => {
             abortController.abort();
@@ -47,7 +63,7 @@ export function Stories({ storiesApiName }) {
         ).then(res => 
             isMounted.current && setStoriesData(res)
         ); 
-        // If user quickly clicks on a paginate button and then some nav link:
+        // If a user quickly clicks on a paginate button and then some nav link:
          return () => {
             abortController.abort();
         }     
@@ -56,37 +72,41 @@ export function Stories({ storiesApiName }) {
 
     const { storiesArr, storiesCount, status } = storiesData;
 
-    const disablePagination = status === 'isLoading';
-
     return (
-        <section className='stories'>
+        <section className='stories_with_comments'>
             {
                 {
                     'isLoading': 
                         <React.Fragment>
                             <FakeStoriesList />
-                            <Pagination 
-                                pageNum={pageNum}
-                                storiesPerPage={storiesPerPage}
-                                disablePagination={disablePagination}
-                            />
                         </React.Fragment>,
                     'error': <p className='error'>Network error. Please try again later.</p>,
                     'isLoaded': 
-                        <React.Fragment>
-                            <StoriesList 
-                                storiesArr={storiesArr}
-                                pageNum={pageNum}
-                                storiesPerPage={storiesPerPage}
-                            />
-                            <Pagination 
-                                pageNum={pageNum}
-                                storiesCount={storiesCount}
-                                handleSelectPageNum={handleSelectPageNum} 
-                                storiesPerPage={storiesPerPage}
-                                disablePagination={disablePagination}
-                            />
-                        </React.Fragment>
+                        <Switch>
+                            <Route exact path={path}>
+                                <React.Fragment>
+                                    <StoriesList 
+                                        storiesArr={storiesArr}
+                                        pageNum={pageNum}
+                                        storiesPerPage={storiesPerPage}
+                                    />
+                                    <Pagination 
+                                        pageNum={pageNum}
+                                        storiesCount={storiesCount}
+                                        handleSelectPageNum={handleSelectPageNum}
+                                        midBtnsArr={midBtnsArr}
+                                        handleMidBtnsArr={handleMidBtnsArr} 
+                                        storiesPerPage={storiesPerPage}
+                                    />
+                                </React.Fragment>
+                            </Route>
+                            <Route path={`${path}/comments_on_:StoryId`}>
+                                <StoryComments />
+                            </Route>
+                            <Route path='*'>
+                                <h2>Invalid URL!</h2>
+                            </Route>
+                        </Switch>
                 }[status]  
             }
         </section>

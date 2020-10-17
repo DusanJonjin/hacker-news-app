@@ -9,13 +9,17 @@ import {
 } from '../- Joint Components -/AllJointComponents';
 import { handleLongUrl } from '../../Utilities/functions';
 import { DarkThemeContext } from '../../Context/DarkThemeContext';
+import { Link, useRouteMatch } from 'react-router-dom';
 import './Styles/Story.css'
 
 export function Story({ storyObj, storyNum }) {
 
+    const routeUrl = useRouteMatch().url;
+
     const { darkTheme } = useContext(DarkThemeContext);
 
     const {
+        id,
         by,
         descendants,
         score,
@@ -23,6 +27,10 @@ export function Story({ storyObj, storyNum }) {
         title,
         url
     } = storyObj
+
+    const storyCommentsLink = {
+        pathname: `${routeUrl}/comments_on_${id}`,
+    }
 
     const urlShort = handleLongUrl(url);
 
@@ -47,15 +55,19 @@ export function Story({ storyObj, storyNum }) {
                 <div className={`small-wrap-one`}>
                     <Score score={score}/>
                     &ensp;|&ensp;
-                    <User user={by} />
+                    <User user={by}
+                          byWord='by:'
+                    />
                 </div>              
                 <div className={`small-wrap-two`}>
                     <TimeAgo time={time} />
                     &ensp;|&ensp;
-                    <CommentsCount 
-                        descendants={descendants}
-                        darkTheme={darkTheme}
-                    />
+                    <Link to={storyCommentsLink} className='story-comments-link'>
+                        <CommentsCount 
+                            descendants={descendants}
+                            darkTheme={darkTheme}
+                        />
+                    </Link>
                 </div>
             </div>
             

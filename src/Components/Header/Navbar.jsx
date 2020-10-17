@@ -11,7 +11,7 @@ export function Navbar({ sideMenuOpen, closeSideMenu, darkTheme }) {
     const navLinks = navLinksDataArr.map((navLink, i) => 
         <li 
             key={i}
-            className={`nav-li ${pathname === navLink.path ? 'selected-link' : ''}`} 
+            className={`nav-li ${pathname.includes(navLink.path) ? 'selected-link' : ''}`} 
             onClick={() => closeSideMenu()}
         >
             <Link 

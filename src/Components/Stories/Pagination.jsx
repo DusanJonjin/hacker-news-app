@@ -1,38 +1,33 @@
 import React from 'react'
-import { useState } from 'react';
 import './Styles/Pagination.css';
 
 export function Pagination(
     { 
         pageNum, 
         storiesCount=500, 
-        handleSelectPageNum, 
+        handleSelectPageNum,
+        handleMidBtnsArr, 
+        midBtnsArr,
         storiesPerPage,
-        disablePagination
     }) {
 
     const firstPageNum = 1;
 
     const lastPageNum = Math.ceil(storiesCount / storiesPerPage);
 
-    /* Count of paginate buttons that find themself between buttons
-    for first and last page: */
     const midBtnsCount = 5;
 
     const initialBtnsArr = Array.from(
         {length: midBtnsCount}, (v ,i) => i + 2
     );
 
-    const [midBtnsArr, setMidBtnsArr] = useState(initialBtnsArr);
-
-
     const handleFirstPageNumSelect = () => {
-        setMidBtnsArr(initialBtnsArr);
+        handleMidBtnsArr(initialBtnsArr);
         handleSelectPageNum(firstPageNum);
     };
 
     const handleLastPageNumSelect = () => {
-        setMidBtnsArr(
+        handleMidBtnsArr(
             Array.from(
                 {length: midBtnsCount}, (v, i) => i + (lastPageNum - midBtnsCount)
             )
@@ -51,7 +46,7 @@ export function Pagination(
         const increasedArrValues = midBtnsArr.map(num => 
             num + numToChangeMidBtnsArr
         );
-        setMidBtnsArr(increasedArrValues);
+        handleMidBtnsArr(increasedArrValues);
     };
 
     const decreaseMidBtnsArrValues = () => {
@@ -59,7 +54,7 @@ export function Pagination(
         const decreasedArrValues = midBtnsArr.map(num => 
             num - numToChangeMidBtnsArr
         );
-        setMidBtnsArr(decreasedArrValues);
+        handleMidBtnsArr(decreasedArrValues);
     };
 
     const handlePaginateBtnClick = (num, i, arr) => {
@@ -85,7 +80,7 @@ export function Pagination(
     }
 
     return (
-        <div className={`pagination ${disablePagination ? 'pagin-disable' : ''}`}>
+        <div className={`pagination`}>
             <p 
                 onClick={handleFirstPageNumSelect}
                 className={`pagin-numbers ${pageNum === firstPageNum ? 'pagin-num-selected' : ''}`}

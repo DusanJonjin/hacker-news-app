@@ -1,3 +1,8 @@
+body {
+    background-color: rgb(243, 243, 245);
+    transition: background-color .4s ease;
+}
+
 .app-wrapper {
     background-color: rgb(243, 243, 245);
     transition: background-color .5s ease;
@@ -15,7 +20,7 @@ main {
 .app-footer {
     font-family: 'Verdana', sans-serif;
     text-align: center;
-    padding: 0 0 3em 0;
+    padding: 2em 0 3em 0;
     font-size: 15px;
     font-style: italic;
     color: rgb(75, 75, 75);

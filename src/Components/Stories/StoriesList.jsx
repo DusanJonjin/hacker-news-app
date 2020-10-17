@@ -13,6 +13,7 @@ export function StoriesList({ storiesArr, pageNum, storiesPerPage }) {
                 <Story 
                     storyObj={story}
                     storyNum={storyNum}
+                    pageNum={pageNum}
                  />
             </li>
         );

@@ -1,14 +1,18 @@
 import React from 'react'
-import { UserAndTimeAgo, Text } from '../- Joint Components -/UserAndTimeAgo'
+import { User, TimeAgo, Text } from '../- Joint Components -/AllJointComponents';
+import './Styles/StoryComment.css'
 
-export function StoryComment() {
+export function StoryComment({ user, time, text}) {
 
     return (
-        <div>
-            <div>
-                <UserAndTimeAgo />
+        <article className={`story-comment`}>
+            <div className={`story-comment-top-wrap`}>
+                <User user={user} />&nbsp;
+                <TimeAgo time={time}/>
             </div>
-            <Text />
-        </div>
+            <div className={`story-comment-bot-wrap`}>
+                <Text text={text} />
+            </div>
+        </article>
     )
 }

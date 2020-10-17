@@ -1,10 +1,10 @@
 import React from 'react';
 
-export function User({ user }) {
+export function User({ user, byWord='' }) {
 
     return (
         <p>
-           by: {user}
+           {byWord} {user}
         </p>
     );
 }

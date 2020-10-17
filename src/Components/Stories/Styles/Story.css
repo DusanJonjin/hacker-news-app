@@ -1,14 +1,14 @@
 .story, .fake-story {
     background: rgb(191, 227, 245);
     border-radius: 10px;
-    border: 1px solid rgb(188, 195, 202);
+    border: 1px solid rgb(195, 202, 209);
     padding: 0 10px;
     transition: .5s ease;
 }
 
 .dark-story {
     background: rgb(52, 52, 54);
-    border: 1px solid rgb(68, 68, 71);
+    border: 1px solid rgb(65, 65, 68);
 }
 
 /* story title link and short url part*/
@@ -32,7 +32,7 @@
 .story-num {
     margin: 0 5px 0 0;
     padding: 5px 0;
-    font-size: 18px;
+    font-size: 17px;
     color: rgb(141, 148, 163);
     text-align: right;
     font-weight: bold;
@@ -96,8 +96,12 @@
     align-items: center;
 }
 
-.small-wrap-one > p, .small-wrap-two > p {
+.small-wrap-one > p, .small-wrap-two p {
     margin: 8px 0 5px 0;
+}
+
+.story-comments-link {
+    text-decoration: none;
 }
 
 .no-comments {
@@ -139,7 +143,7 @@
     }
 
     .story-num {
-        
+        font-size: 18px;
     }
 
     .short-url {

@@ -1,7 +1,7 @@
 export const navLinksDataArr = [
     {   
         name:'Top stories',
-        path: '/',
+        path: '/top_stories',
         api: 'topstories'
     }, 
     {
@@ -10,7 +10,7 @@ export const navLinksDataArr = [
         api: 'newstories'
     }, 
     {
-        name: 'Comments',
-        path: '/comments'
+        name: 'All comments',
+        path: '/all_comments'
     }
 ];
