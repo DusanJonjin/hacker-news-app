@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StoryCommentsDetails } from './StoryCommentsDetails';
 import { StoryCommentsList } from './StoryCommentsList';
 import { CommentsCount } from '../- Joint Components -/CommentsCount';
 import { FakeCommentsList } from '../- Placeholder Components -/FakeCommentsList';
 import { getStory, getStoryComments } from '../../Api Calls/apiCalls';
+import { DarkThemeContext } from '../../Context/DarkThemeContext';
 import { Link, useLocation } from 'react-router-dom';
 import './Styles/StoryComments.css';
 
 export function StoryComments(props) {
+
+    const { darkTheme } = useContext(DarkThemeContext);
 
     const { pathname } = useLocation();
 
@@ -56,34 +59,29 @@ export function StoryComments(props) {
 
     return (
         <div className='story-comments-wrap'>
+            <p className={`back-link`}>
+                <Link 
+                    to={`/${storiesType}_stories`}
+                    className={`story-comments-link`}
+                >
+                    &lt;Back to {storiesType} stories
+                </Link>
+            </p>
             {
                 {
                     'isLoading': 
                         <React.Fragment>
-                            <p className={`back-link`}>
-                                <Link 
-                                    to={`/${storiesType}_stories`}
-                                    className={`story-comments-link`}
-                                >
-                                    &lt;Back to {storiesType} stories
-                                </Link>
-                            </p>
-                            <p className={`fake-story-comm-details`}> </p>
+                            <p className={`fake-story-comm-details ${darkTheme ? 'fake-story-comm-det-dark' : ''}`}> </p>
                         </React.Fragment>,
                     'error': 
                         <p className='error'>Network error. Please try again later.</p>,
                     'storyLoaded':
                         <React.Fragment>
-                            <p className={`back-link`}>
-                                <Link 
-                                    to={`/${storiesType}_stories`}
-                                    className={`story-comments-link`}
-                                >
-                                    &lt;Back to {storiesType} stories
-                                </Link>
-                            </p>
-                            <div className={`details-comments-wrap`}>
-                                <StoryCommentsDetails story={story} />
+                            <div className={`details-comments-wrap ${darkTheme ? 'details-comm-wrap-dark' : ''}`}>
+                                <StoryCommentsDetails 
+                                    story={story}
+                                    darkTheme={darkTheme}
+                                />
                                 <CommentsCount 
                                     descendants={story.descendants} 
                                 />
@@ -94,16 +92,11 @@ export function StoryComments(props) {
                         </React.Fragment>,
                     'storyAndCommentsLoaded':
                         <React.Fragment>
-                            <p className={`back-link`}>
-                                <Link 
-                                    to={`/${storiesType}_stories`}
-                                    className={`story-comments-link`}
-                                >
-                                    &lt;Back to {storiesType} stories
-                                </Link>
-                            </p>
-                            <div className={`details-comments-wrap`}>
-                                <StoryCommentsDetails story={story} />
+                            <div className={`details-comments-wrap ${darkTheme ? 'details-comm-wrap-dark' : ''}`}>
+                                <StoryCommentsDetails 
+                                    story={story}
+                                    darkTheme={darkTheme}
+                                />
                                 <CommentsCount 
                                     descendants={story.descendants} 
                                 />

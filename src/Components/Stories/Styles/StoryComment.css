@@ -4,6 +4,12 @@
     border-radius: 10px;
     margin: 0 6px 8px 0; 
     padding: 0 10px;
+    transition: .5s ease;
+}
+
+.story-comment-dark { 
+    background-color: rgb(35, 35, 37);
+    border: 1px solid rgb(72, 72, 75);
 }
 
 .story-comment-top-wrap {
@@ -12,19 +18,25 @@
     font-size: 14px;
     font-weight: bold;
     padding: 12px 0 12px 0;
+    transition: .5s ease;
+}
+
+.story-comm-top-wrap-dark {
+    color: rgb(112, 131, 141);
 }
    
 .story-comment-top-wrap p {
    margin: 0;
 }
 
-.story-comment-bot-wrap > p {
-    margin:0;
-}
-
 .story-comment-bot-wrap {
     padding-bottom: 12px;
+    color: black;
+    transition: .5s ease;
+}
 
+.story-comm-bot-wrap-dark {
+    color: rgb(240, 240, 242);
 }
 
 .story-comment-bot-wrap * {
@@ -34,10 +46,15 @@
     overflow: hidden;
 }
 
+.story-comment-bot-wrap > p {
+    margin:0;
+}
+
 @media only screen and (min-width: 1340px) {
 
     .story-comment {
         margin: 0 15px 10px 0;
+        padding: 0 15px;
     }
 
     .story-comment-top-wrap {

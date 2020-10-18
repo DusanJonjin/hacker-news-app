@@ -9,7 +9,7 @@ import {
 import { handleLongUrl } from '../../Utilities/functions';
 import './Styles/StoryCommentsDetails.css';
 
-export function StoryCommentsDetails({ story }) {
+export function StoryCommentsDetails({ story, darkTheme }) {
 
     const {
         url,
@@ -22,14 +22,17 @@ export function StoryCommentsDetails({ story }) {
     const urlShort = handleLongUrl(url);
 
     return (
-        <article className={`story-comm-details-box`}>
+        <article className={`story-comm-details-box ${darkTheme ? 'details-box-dark' : ''}`}>
             <Title 
                 storyUrl={url}
                 title={title}
+                darkTheme={darkTheme}
             />
             <WebsiteUrlShort 
-                urlShort={urlShort}/>
-            <div className='story-comm-details-bot-wrap'>
+                urlShort={urlShort}
+                darkTheme={darkTheme}
+            />
+            <div className={`story-comm-details-bot-wrap ${darkTheme ? 'bot-wrap-dark' : ''}`}>
                 <div>
                     <Score score={score}/>&ensp;|&ensp;
                     <User 

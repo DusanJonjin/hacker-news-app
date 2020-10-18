@@ -7,8 +7,8 @@
 }
 
 .dark-story {
-    background: rgb(52, 52, 54);
-    border: 1px solid rgb(65, 65, 68);
+    background: rgb(45, 45, 47);
+    border: 1px solid rgb(57, 57, 60);
 }
 
 /* story title link and short url part*/
@@ -21,7 +21,7 @@
 }
 
 .top-wrap-dark {
-    background: rgb(67, 67, 69);
+    background: rgb(62, 62, 64);
 }
 
 .story-top-wrap > h2 {
@@ -40,7 +40,7 @@
 }
 
 .dark-story-num {
-    color: rgb(120, 122, 128);
+    color: rgb(115, 115, 120);
 }
 
 .title-link {
