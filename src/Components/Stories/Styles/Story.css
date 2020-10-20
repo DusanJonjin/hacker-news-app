@@ -104,6 +104,11 @@
     text-decoration: none;
 }
 
+.link-disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
 .no-comments {
     color: rgb(115, 115, 118);
     transition: .5s ease;

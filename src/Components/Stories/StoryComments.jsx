@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { StoryCommentsDetails } from './StoryCommentsDetails';
-import { StoryCommentsList } from './StoryCommentsList';
-import { CommentsCount } from '../- Joint Components -/CommentsCount';
-import { FakeCommentsList } from '../- Placeholder Components -/FakeCommentsList';
+import { StoryCommentsAndDetails } from './StoryCommentsAndDetails';
 import { getStory, getStoryComments } from '../../Api Calls/apiCalls';
 import { DarkThemeContext } from '../../Context/DarkThemeContext';
 import { Link, useLocation } from 'react-router-dom';
@@ -18,9 +15,11 @@ export function StoryComments(props) {
 
     const storiesType = pathname.slice(1, pathname.indexOf('_'));
 
-    const [storyWithComments, setStoryWithComments] = useState({status: 'isLoading', story:''});
+    const [storyWithComments, setStoryWithComments] = useState(
+        {status: 'isLoading', story: {}, comments: []}
+    );
 
-    const { status, story, comments } = storyWithComments;
+    const { status, story } = storyWithComments;
 
     //Prevents state update on an unmounted component:
     const isMounted = useRef(true);
@@ -48,8 +47,7 @@ export function StoryComments(props) {
             isMounted.current && setStoryWithComments(prevStoryWithComments => {
                 return {
                     ...prevStoryWithComments, 
-                    status: 'storyAndCommentsLoaded',
-                    comments: res
+                    comments: [...res]
                 }
             })
         );
@@ -59,7 +57,7 @@ export function StoryComments(props) {
 
     return (
         <div className='story-comments-wrap'>
-            <p className={`back-link`}>
+            <p className={`back-link ${darkTheme ? 'back-link-dark' : ''}`}>
                 <Link 
                     to={`/${storiesType}_stories`}
                     className={`story-comments-link`}
@@ -74,35 +72,14 @@ export function StoryComments(props) {
                             <p className={`fake-story-comm-details ${darkTheme ? 'fake-story-comm-det-dark' : ''}`}> </p>
                         </React.Fragment>,
                     'error': 
-                        <p className='error'>Network error. Please try again later.</p>,
+                        <p className='error'>
+                            Network error. Refresh the browser, or try again later.
+                        </p>,
                     'storyLoaded':
-                        <React.Fragment>
-                            <div className={`details-comments-wrap ${darkTheme ? 'details-comm-wrap-dark' : ''}`}>
-                                <StoryCommentsDetails 
-                                    story={story}
-                                    darkTheme={darkTheme}
-                                />
-                                <CommentsCount 
-                                    descendants={story.descendants} 
-                                />
-                                <FakeCommentsList 
-                                    commentsCount={story.descendants}
-                                />
-                            </div>
-                        </React.Fragment>,
-                    'storyAndCommentsLoaded':
-                        <React.Fragment>
-                            <div className={`details-comments-wrap ${darkTheme ? 'details-comm-wrap-dark' : ''}`}>
-                                <StoryCommentsDetails 
-                                    story={story}
-                                    darkTheme={darkTheme}
-                                />
-                                <CommentsCount 
-                                    descendants={story.descendants} 
-                                />
-                                <StoryCommentsList comments={comments} />
-                            </div>
-                        </React.Fragment>
+                        <StoryCommentsAndDetails
+                            darkTheme={darkTheme}
+                            storyWithComments={storyWithComments}
+                        />                      
                 }[status]
             }
         </div>

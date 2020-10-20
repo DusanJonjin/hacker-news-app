@@ -6,16 +6,28 @@ import {
     Text 
 } from '../- Joint Components -/AllJointComponents';
 
-export function CommentByTime() {
+export function CommentByTime(props) {
+
+    const {
+        user,
+        time,
+        storyUrl,
+        title,
+        text
+    } = props;
 
     return (
         <div>
             <div>
-                <User />
-                <TimeAgo />
-                 on: <Title />
+                <User user={user}/>
+                <TimeAgo time={time}/>
+                    on: 
+                        <Title 
+                            storyUrl={storyUrl}
+                            title={title}
+                        />
             </div>
-            <Text />
+            <Text text={text} />
         </div>
     )
 }

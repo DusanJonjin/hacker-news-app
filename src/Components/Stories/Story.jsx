@@ -62,7 +62,9 @@ export function Story({ storyObj, storyNum }) {
                 <div className={`small-wrap-two`}>
                     <TimeAgo time={time} />
                     &ensp;|&ensp;
-                    <Link to={storyCommentsLink} className='story-comments-link'>
+                    <Link 
+                        to={storyCommentsLink} 
+                        className={`story-comments-link ${descendants < 1 ? 'link-disabled' : '' }`}>
                         <CommentsCount 
                             descendants={descendants}
                             darkTheme={darkTheme}

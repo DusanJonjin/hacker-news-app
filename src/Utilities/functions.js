@@ -44,3 +44,15 @@ export const calculateTimeAgo = storyTime => {
     if (hoursAgo < 24) return singularOrNot(hoursAgo, 'hour');
     else return singularOrNot(daysAgo, 'day');
 };
+
+/* Recursive function for getting the count of nested comments (replies)
+below selected (collapsed) comment in StoryCommentsList component: */
+export const nestedCommentsCount = (commentComments, accum) => {
+    if (!commentComments) return;
+    const calculateNested = commentComments.reduce((acc, comment) => {
+        const commentsSum = acc + comment.comments.length;
+        const nestedCommentsSum = nestedCommentsCount(comment.comments, commentsSum);
+        return nestedCommentsSum;
+    }, accum);
+    return calculateNested;
+}

@@ -17,6 +17,7 @@ export function Stories({ storiesApiName }) {
 
     const [pageNum, setPageNum] = useState(1);
 
+    // eslint-disable-next-line no-unused-vars
     const [storiesPerPage, setStoriesPerPage] = useState(20);
 
     // Initial array of numbers for middle paginate buttons:
@@ -80,7 +81,10 @@ export function Stories({ storiesApiName }) {
                         <React.Fragment>
                             <FakeStoriesList />
                         </React.Fragment>,
-                    'error': <p className='error'>Network error. Please try again later.</p>,
+                    'error': 
+                        <p className='error'>
+                            Network error. Refresh the browser, or try again later.
+                        </p>,
                     'isLoaded': 
                         <Switch>
                             <Route exact path={path}>

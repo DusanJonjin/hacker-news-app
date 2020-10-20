@@ -14,6 +14,7 @@
 
 .story-comment-top-wrap {
     display: flex;
+    flex-wrap: wrap;
     color: rgb(128, 141, 145);
     font-size: 14px;
     font-weight: bold;
@@ -48,6 +49,24 @@
 
 .story-comment-bot-wrap > p {
     margin:0;
+}
+
+.comment-exp-collapse {
+    cursor: pointer;
+    color: rgb(252, 76, 53);
+    transition: .3s ease;
+}
+
+.comment-exp-collapse:hover {
+    color: rgb(255, 110, 91);
+}
+
+.exp-collapse-dark {
+    color: rgb(255, 131, 115);
+}
+
+.exp-collapse-dark:hover {
+    color: rgb(255, 89, 67);
 }
 
 @media only screen and (min-width: 1340px) {

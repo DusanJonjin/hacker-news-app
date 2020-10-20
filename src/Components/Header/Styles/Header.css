@@ -47,12 +47,12 @@
 .theme-toggle-bar {
     width: 55px;
     height: 20px;
-    background-color: rgb(68, 165, 255);
+    background-color: rgb(30, 30, 30);
     border-radius: 12px;
-    background-image: url(../../../Images/sun.png);
+    background-image: url(../../../Images/moon.png);
     background-repeat: no-repeat;
-    background-position: 11%;
-    background-size: 20px 20px;
+    background-position: 17%;
+    background-size: 17px 17px;
     position: relative;
     transition: background-color .7s ease;
     cursor: pointer;
@@ -72,11 +72,11 @@
 }
 
 .bar-dark {
-    background: rgb(10, 10, 10);
-    background-image: url(../../../Images/moon.png);
+    background-color: rgb(68, 165, 255);
+    background-image: url(../../../Images/sun.png);
     background-repeat: no-repeat;
     background-position: 85%;
-    background-size: 17px 17px;
+    background-size: 20px 20px;
 }
 
 .bar-dark::after {

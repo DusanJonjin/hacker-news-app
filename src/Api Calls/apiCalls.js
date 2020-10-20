@@ -25,7 +25,8 @@ export const getStory = async storyID => {
         const fetchedStory = await getItem(storyID);
         const storyObj = {
             status: 'storyLoaded',
-            story: fetchedStory
+            story: fetchedStory,
+            comments: []
         }
         return storyObj;
     }
@@ -90,3 +91,79 @@ export const getStoryComments = async (storyKids, abortSignal) => {
         return {status: 'error'};
     }
 };
+
+
+/*Alike previous function, we use this async function for getting all
+of the comments, but this time unnested in one big flat array: */
+const getCommentsArray = async (storyKids, moreComments) => {
+    try {
+        if (storyKids === undefined || storyKids === [])
+            return [];
+        /* We need to slice the kids because they contain unknow number of
+        nested comments, which could be a very big number! */
+        const fetchComments = storyKids.slice(moreComments[0], moreComments[1])
+            .map(async commentID => {
+                const comment = await getItem(commentID);
+                return comment;
+            }
+        );
+        const comments = await Promise.all(fetchComments);
+        const commentsWithKids = comments.filter(commentObj =>
+             commentObj && commentObj.kids);
+        const getNestedComments = commentsWithKids.map(async comm =>
+             await getCommentsArray(comm.kids, moreComments)
+        );
+        const nestedComments = await Promise.all(getNestedComments);
+        const allComments = comments.concat(nestedComments);
+        const allCommentsInFlatArray = allComments.flat().filter(comment =>
+             comment && !comment.deleted && !comment.dead
+        );
+        return allCommentsInFlatArray;
+    }
+    catch (err) {
+        console.log('Error', err);
+    }
+}
+
+export const getAllComments = async moreComments =>  {
+    try {
+        //By fetching the first Api (topstories) we get an array of story id's:        
+        const allStoriesIds = await getStoriesIDs('topstories');
+        const slicedStoriesIds = allStoriesIds.slice(0, 20);
+        /* We need to map that array, and put every single maped value in our
+        next Api from which we then get an array of promises 
+        (for every single story - one promise): */
+        const getStorObjectsArr = slicedStoriesIds.map(async id => 
+            await getItem(id)
+        );
+        /* Then we wrap them all together with Promise.all object method,
+        and finally we get a single promise as an array of objects (stories):*/
+        const allStorObjectsArr = await Promise.all(getStorObjectsArr);
+        // Filter out unwanted values and stories without comments (kids):
+        const storObjectsWithKids = allStorObjectsArr.filter(res => 
+            res && res.kids
+        );
+        if (!storObjectsWithKids) return {status: 'error'}
+        // Then we use the function above to get all of comments in one array: 
+        const getAllComments = storObjectsWithKids.map(async story => {
+            return await getCommentsArray(story.kids, moreComments);
+        });
+        /* Again we need to make the array of promises be only one promise
+         with array inside of it: */
+        const allCommentsDeepArr = await Promise.all(getAllComments);
+        /* We concat two arrays so that we can use the recursion to get the title
+        of the story, whose given comment belongs to: */
+        const allDataArray = storObjectsWithKids.concat(allCommentsDeepArr);
+        // Flatten the array, and filter out unwanted values (comments):
+        const allDataClean = allDataArray.flat().filter(comment => !comment?.deleted);
+        // Sort the data array by time:
+        const timeSortedAllData = allDataClean.sort((a, b) => (b.time - a.time));
+        return {
+            status: 'isLoaded',
+            comments: timeSortedAllData
+        }
+    }
+    catch (err) {
+        return {status: 'error'};
+    }
+}

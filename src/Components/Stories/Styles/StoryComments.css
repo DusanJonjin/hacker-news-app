@@ -11,7 +11,20 @@
 }
 
 .back-link > * {
-    color: rgb(255, 59, 34);
+    color: rgb(252, 77, 54);
+    transition: .3s ease;
+}
+
+.back-link > *:hover {
+    color: rgb(255, 109, 98);
+}
+
+.back-link-dark > * {
+    color: rgb(255, 122, 104);
+}
+
+.back-link-dark > *:hover {
+    color: rgb(255, 82, 59);
 }
 
 .details-comments-wrap {
