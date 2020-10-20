@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CommentsByTimeList } from './CommentsByTimeList';
 import { CommentsPaginate } from './CommentsPaginate';
 import { FakeCommentsList } from '../- Placeholder Components -/FakeCommentsList';
@@ -31,10 +31,29 @@ export function CommentsByTime() {
         }
     };
 
+    //Prevents state update on an unmounted component:
+    const isMounted = useRef(true);
+
+    const abortController = new AbortController();
+
+    const abortSignal = abortController.signal;
+    
     useEffect(() => {
-        getAllComments(moreComments).then(res => {
-            setAllComments(res);
-        });
+        return () => {
+            abortController.abort();
+            isMounted.current = false;
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        getAllComments(moreComments, abortSignal).then(res => 
+            isMounted.current && setAllComments(res)
+        );
+        return () => {
+            abortController.abort()
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [moreComments])
 
     const { status, comments } = allComments;

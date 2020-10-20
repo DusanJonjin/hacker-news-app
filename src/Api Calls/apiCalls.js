@@ -95,7 +95,7 @@ export const getStoryComments = async (storyKids, abortSignal) => {
 
 /*Alike previous function, we use this async function for getting all
 of the comments, but this time unnested in one big flat array: */
-const getCommentsArray = async (storyKids, moreComments) => {
+const getCommentsArray = async (storyKids, moreComments, abortSignal) => {
     try {
         if (storyKids === undefined || storyKids === [])
             return [];
@@ -103,7 +103,7 @@ const getCommentsArray = async (storyKids, moreComments) => {
         nested comments, which could be a very big number! */
         const fetchComments = storyKids.slice(moreComments[0], moreComments[1])
             .map(async commentID => {
-                const comment = await getItem(commentID);
+                const comment = await getItem(commentID, abortSignal);
                 return comment;
             }
         );
@@ -111,7 +111,7 @@ const getCommentsArray = async (storyKids, moreComments) => {
         const commentsWithKids = comments.filter(commentObj =>
              commentObj && commentObj.kids);
         const getNestedComments = commentsWithKids.map(async comm =>
-             await getCommentsArray(comm.kids, moreComments)
+             await getCommentsArray(comm.kids, moreComments, abortSignal)
         );
         const nestedComments = await Promise.all(getNestedComments);
         const allComments = comments.concat(nestedComments);
@@ -121,20 +121,20 @@ const getCommentsArray = async (storyKids, moreComments) => {
         return allCommentsInFlatArray;
     }
     catch (err) {
-        console.log('Error', err);
+        return 'error';
     }
 }
 
-export const getAllComments = async moreComments =>  {
+export const getAllComments = async (moreComments, abortSignal) =>  {
     try {
         //By fetching the first Api (topstories) we get an array of story id's:        
-        const allStoriesIds = await getStoriesIDs('topstories');
+        const allStoriesIds = await getStoriesIDs('topstories', abortSignal);
         const slicedStoriesIds = allStoriesIds.slice(0, 20);
         /* We need to map that array, and put every single maped value in our
         next Api from which we then get an array of promises 
         (for every single story - one promise): */
         const getStorObjectsArr = slicedStoriesIds.map(async id => 
-            await getItem(id)
+            await getItem(id, abortSignal)
         );
         /* Then we wrap them all together with Promise.all object method,
         and finally we get a single promise as an array of objects (stories):*/
@@ -143,10 +143,10 @@ export const getAllComments = async moreComments =>  {
         const storObjectsWithKids = allStorObjectsArr.filter(res => 
             res && res.kids
         );
-        if (!storObjectsWithKids) return {status: 'error'}
+        if (!storObjectsWithKids || storObjectsWithKids === 'error') return {status: 'error'}
         // Then we use the function above to get all of comments in one array: 
         const getAllComments = storObjectsWithKids.map(async story => {
-            return await getCommentsArray(story.kids, moreComments);
+            return await getCommentsArray(story.kids, moreComments, abortSignal);
         });
         /* Again we need to make the array of promises be only one promise
          with array inside of it: */
