@@ -1,21 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { CommentsByTimeList } from './CommentsByTimeList';
 import { CommentsPaginate } from './CommentsPaginate';
 import { FakeCommentsList } from '../- Placeholder Components -/FakeCommentsList';
-import { getAllComments } from '../../Api Calls/apiCalls';
+import { getCommentsWithStories } from '../../Api Calls/apiCalls';
+import { DarkThemeContext } from '../../Context/DarkThemeContext';
+import './Styles/CommentsByTime.css'
 
 
 export function CommentsByTime() {
 
+    const { darkTheme } = useContext(DarkThemeContext);
+
     const [moreComments, setMoreComments] = useState([0, 1]);
 
-    const initialCommentsState = {status: 'isLoading', comments: []};
+    const initCommWithStoriesState = {status: 'isLoading', commentsAndStories: []};
 
-    const [allComments, setAllComments] = useState(initialCommentsState);
+    const [commentsWithStories, setCommentsWithStories] = useState(initCommWithStoriesState);
 
     const handleShowPrevNextComments = name => {
         if (name === 'previous') {
-            setAllComments(initialCommentsState);
+            setCommentsWithStories(initCommWithStoriesState);
             setMoreComments(prevMoreComments => 
                 prevMoreComments.map(num =>
                     num - 1
@@ -23,10 +27,10 @@ export function CommentsByTime() {
             )
         }
         else { 
-            setAllComments(initialCommentsState);
+            setCommentsWithStories(initCommWithStoriesState);
             setMoreComments(prevMoreComments => 
-            prevMoreComments.map(num => 
-                num + 1
+                prevMoreComments.map(num => 
+                    num + 1
             ));
         }
     };
@@ -47,19 +51,20 @@ export function CommentsByTime() {
     }, []);
 
     useEffect(() => {
-        getAllComments(moreComments, abortSignal).then(res => 
-            isMounted.current && setAllComments(res)
+        getCommentsWithStories(moreComments, abortSignal).then(res => 
+            isMounted.current && setCommentsWithStories(res)
         );
+        window.scrollTo(0 ,0);
         return () => {
             abortController.abort()
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [moreComments])
 
-    const { status, comments } = allComments;
+    const { status, commentsAndStories } = commentsWithStories;
     
     return (
-        <section>
+        <section className={`comments-by-time ${darkTheme ? 'dark-by-time' : ''}`}>
             {
                 {
                     'isLoading':
@@ -71,7 +76,7 @@ export function CommentsByTime() {
                     'isLoaded':
                         <React.Fragment>
                             <CommentsByTimeList
-                                comments={comments} 
+                                commentsAndStories={commentsAndStories} 
                             />
                             <CommentsPaginate 
                                 moreComments={moreComments}

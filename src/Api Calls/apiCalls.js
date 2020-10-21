@@ -125,7 +125,7 @@ const getCommentsArray = async (storyKids, moreComments, abortSignal) => {
     }
 }
 
-export const getAllComments = async (moreComments, abortSignal) =>  {
+export const getCommentsWithStories = async (moreComments, abortSignal) =>  {
     try {
         //By fetching the first Api (topstories) we get an array of story id's:        
         const allStoriesIds = await getStoriesIDs('topstories', abortSignal);
@@ -160,7 +160,7 @@ export const getAllComments = async (moreComments, abortSignal) =>  {
         const timeSortedAllData = allDataClean.sort((a, b) => (b.time - a.time));
         return {
             status: 'isLoaded',
-            comments: timeSortedAllData
+            commentsAndStories: timeSortedAllData
         }
     }
     catch (err) {

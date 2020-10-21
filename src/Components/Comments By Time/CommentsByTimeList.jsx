@@ -1,33 +1,35 @@
 import React from 'react';
 import { CommentByTime } from './CommentByTime';
+import './Styles/CommentsByTimeList.css'
 
-export function CommentsByTimeList({ comments }) {
+export function CommentsByTimeList({ commentsAndStories }) {
 
-    //Doing a recursion to find the title of the story on which the comment belongs:
-    const findStoryObj = (arr, comment) => {
-        const storyTitle = arr.reduce((acc, item) =>
-            comment.parent === item.id ?
-                item.parent ? findStoryObj(arr, item) : {...acc, ...item}
+    //Doing a recursion to find the title of the story in which the comment belongs:
+    const findStoryObj = (commAndStories, commObj) => {
+        const storyTitle = commAndStories.reduce((acc, item) =>
+            commObj.parent === item.id ?
+                item.parent ? findStoryObj(commAndStories, item) : {...acc, ...item}
             : acc
     , {})
         return storyTitle;
     }
 
-    const commentsList = comments.map((comment, i, arr) => 
-        comment.parent &&
-            <li key={comment.id}>
+    const commentsList = commentsAndStories.map((commObj, i, arr) => 
+        //show comments only (comments have parent property):
+        commObj.parent &&
+            <li key={commObj.id} className='comments-by-time-li'>
                 <CommentByTime 
-                    user={comment.by}
-                    time={comment.time}
-                    storyUrl={findStoryObj(arr, comment).url}
-                    title={findStoryObj(arr, comment).title}
-                    text={comment.text}
+                    user={commObj.by}
+                    time={commObj.time}
+                    storyUrl={findStoryObj(arr, commObj).url}
+                    title={findStoryObj(arr, commObj).title}
+                    text={commObj.text}
                 />
             </li>
     );
 
     return (
-        <ol>
+        <ol className='comments-by-time-ol'>
             {commentsList}
         </ol>
     )

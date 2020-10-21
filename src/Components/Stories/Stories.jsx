@@ -64,6 +64,7 @@ export function Stories({ storiesApiName }) {
         ).then(res => 
             isMounted.current && setStoriesData(res)
         ); 
+        window.scrollTo(0, 0);
         // If a user quickly clicks on a paginate button and then some nav link:
          return () => {
             abortController.abort();

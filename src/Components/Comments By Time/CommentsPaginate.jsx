@@ -1,17 +1,18 @@
 import React from 'react';
+import './Styles/CommentsPaginate.css'
 
 
 export function CommentsPaginate({ showPrevNextComments, moreComments }) {
 
     return (       
-        <div className='show-more'>
+        <div className='comments-paginate'>
             {moreComments[0] > 0 && 
                 <p onClick={() => showPrevNextComments('previous')}>
-                    &lt; Previous comments
+                    &lt; Previous
                 </p>
             }
             <p onClick={() => showPrevNextComments('more')}>
-                More comments &gt;
+                More &gt;
             </p>
         </div>       
     )

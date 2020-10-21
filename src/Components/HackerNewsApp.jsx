@@ -43,7 +43,9 @@ function HackerNewsApp() {
                         <CommentsByTime />
                     </Route>
                     <Route path='*'>
-                        <h1>No match for this URL!</h1>
+                        <p className='url-no-match'>
+                            No match for this URL!
+                        </p>
                     </Route>
                 </Switch>       
             </main>

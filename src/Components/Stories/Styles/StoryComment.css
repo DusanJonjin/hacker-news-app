@@ -15,6 +15,7 @@
 .story-comment-top-wrap {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     color: rgb(128, 141, 145);
     font-size: 14px;
     font-weight: bold;
