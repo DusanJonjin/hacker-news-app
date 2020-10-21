@@ -1,0 +1,25 @@
+.comments-paginate {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 19px;
+}
+
+.comments-paginate > p {
+    width: 100px;
+    max-width: 100%;
+    padding: 7px 10px;
+    background: rgb(23, 116, 192);
+    border-radius: 7px;
+    color: rgb(241, 241, 241);
+    cursor: pointer;
+    text-align: center;
+    transition: .3s ease;
+    margin: 15px 10px;
+}
+
+.comments-paginate > p:hover {
+    background:  rgb(91, 174, 241);
+    color: rgb(50, 50, 50);
+}
+

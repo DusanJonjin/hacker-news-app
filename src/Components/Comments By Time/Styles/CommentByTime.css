@@ -1,0 +1,11 @@
+.story-comment-top-wrap > h2 {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+@media only screen and (min-width: 1340px) {
+    .story-comment-top-wrap > h2 {
+        font-size: 15px;
+    }
+}
