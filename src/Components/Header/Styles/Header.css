@@ -26,9 +26,9 @@
 #logo-wrapper {
     display: flex;
     align-self: center;
-    font-family: 'Impact', sans-serif;
-    font-size: 22px;
-    letter-spacing: .07em;
+    font-family: 'Gill Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
     color: rgb(227, 232, 243);
     margin-left: 15px;
 }
@@ -148,7 +148,10 @@
     }
 
     #logo-wrapper {
+        font-family: 'Impact', sans-serif;
         font-size: 26px;
+        font-weight: normal;
+        letter-spacing: .06em;
     }
 }
 
