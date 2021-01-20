@@ -28,7 +28,7 @@
 }
 
 .details-comments-wrap {
-    background-color: rgb(194, 236, 255);
+    background-color: rgb(174, 236, 255);
     padding-bottom: 1em;
     transition: .5s ease;
 }
@@ -40,11 +40,11 @@
 .details-comments-wrap > .comments-exist {
     font-size: 22px;
     font-weight: bold;
-    color: rgb(71, 102, 131);
+    color: rgb(65, 93, 119);
     margin: 0;
     padding: 15px;
     text-align: center;
-    background-color: rgb(194, 236, 255);
+    background-color: rgb(174, 236, 255);
     pointer-events: none;
     transition: .5s ease;
 }

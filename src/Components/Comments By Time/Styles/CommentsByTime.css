@@ -1,7 +1,7 @@
 .comments-by-time {
     max-width: 1350px;
     margin: 0 auto;
-    background-color: rgb(194, 236, 255);
+    background-color: rgb(174, 236, 255);
     padding: 2em 0 1.5em 0;
     transition: .5s ease;
 }

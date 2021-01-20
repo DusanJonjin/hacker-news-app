@@ -1,8 +1,8 @@
 .story-comm-details-box {
-    background-color: rgb(148, 230, 255);
+    background-color: rgb(136, 227, 255);
     padding: 10px;
     text-align: center;
-    border-bottom: 1px solid rgb(173, 195, 209);
+    border-bottom: 1px solid rgb(187, 211, 226);
     transition: .5s ease;
 }
 

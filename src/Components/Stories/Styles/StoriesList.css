@@ -4,8 +4,8 @@
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 650px));
-    column-gap: 1.5em;
-    row-gap: 1.7em;
+    column-gap: 1.3em;
+    row-gap: 1.5em;
     justify-content: center;
     list-style-type: none;
 }
