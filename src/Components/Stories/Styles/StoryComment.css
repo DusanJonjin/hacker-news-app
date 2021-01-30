@@ -1,7 +1,7 @@
 .story-comment {
     background-color:rgb(236, 249, 255);
-    border: 1px solid rgb(193, 201, 204);
-    border-radius: 10px;
+    border: 1px solid rgb(236, 249, 255);
+    border-radius: 7px;
     margin: 0 6px 8px 0; 
     padding: 0 10px;
     transition: .5s ease;

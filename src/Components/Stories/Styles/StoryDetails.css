@@ -2,13 +2,13 @@
     background-color: rgb(136, 227, 255);
     padding: 10px;
     text-align: center;
-    border-bottom: 1px solid rgb(187, 211, 226);
+    border-bottom: 1px solid rgb(136, 227, 255);
     transition: .5s ease;
 }
 
 .details-box-dark {
-    background-color: rgb(55, 55, 57);;
-    border-bottom: 1px solid rgb(85, 85, 87);
+    background-color: rgb(55, 55, 57);
+    border-bottom: 1px solid  rgb(55, 55, 57);
 }
 
 .story-comm-details-box > h2 {
