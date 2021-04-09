@@ -47,7 +47,7 @@
 .fake-story-bottom {
     width: 60%;
     height: 35px;
-    margin: 10px;
+    margin: 19px 10px;
     background-color: rgb(171, 203, 216);
     transition: .5s ease;
 }

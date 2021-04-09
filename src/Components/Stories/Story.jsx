@@ -54,14 +54,12 @@ export function Story({ storyObj, storyNum }) {
             <div className={`story-bottom-wrap ${darkTheme ? 'bot-wrap-dark' : ''}`}>
                 <div className={`small-wrap-one`}>
                     <Score score={score}/>
-                    &ensp;|&ensp;
                     <User user={by}
                           byWord='by:'
                     />
                 </div>              
                 <div className={`small-wrap-two`}>
-                    <TimeAgo time={time} />
-                    &ensp;|&ensp;
+                    <TimeAgo time={time} />                  
                     <Link 
                         to={storyCommentsLink} 
                         className={`story-comments-link ${descendants < 1 ? 'link-disabled' : '' }`}>
@@ -71,8 +69,7 @@ export function Story({ storyObj, storyNum }) {
                         />
                     </Link>
                 </div>
-            </div>
-            
+            </div>           
         </article>
     )
 }

@@ -24,12 +24,12 @@ main {
 }
 
 .app-footer {
-    font-family: 'Verdana', sans-serif;
+    font-family: 'Roboto', sans-serif;;
     text-align: center;
     padding: 2em 0 3em 0;
-    font-size: 15px;
+    font-size: 16px;
     font-style: italic;
-    color: rgb(75, 75, 75);
+    color: rgb(115, 115, 117);
     transition: color .5s ease;
 }
 

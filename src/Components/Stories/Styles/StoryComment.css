@@ -1,5 +1,5 @@
 .story-comment {
-    background-color:rgb(236, 249, 255);
+    background-color:rgb(239, 250, 255);
     border: 1px solid rgb(236, 249, 255);
     border-radius: 7px;
     margin: 0 6px 8px 0; 
@@ -16,9 +16,11 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    color: rgb(128, 141, 145);
-    font-size: 14px;
+    color: rgb(121, 134, 138);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
     font-weight: bold;
+    letter-spacing: .035em;
     padding: 12px 0 12px 0;
     transition: .5s ease;
 }
@@ -32,13 +34,14 @@
 }
 
 .story-comment-bot-wrap {
+    font-family: 'Roboto', sans-serif;
     padding-bottom: 12px;
-    color: black;
+    color: rgb(43, 43, 45);
     transition: .5s ease;
 }
 
 .story-comm-bot-wrap-dark {
-    color: rgb(240, 240, 242);
+    color: rgb(220, 220, 222);
 }
 
 .story-comment-bot-wrap * {
@@ -78,7 +81,7 @@
     }
 
     .story-comment-top-wrap {
-        font-size: 15px;
+        font-size: 16px;
         padding: 13px 0 13px 0;
     }
 

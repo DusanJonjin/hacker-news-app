@@ -8,15 +8,9 @@ export function CommentsCount({ descendants, darkTheme }) {
         </p>
     );
 
-    if (descendants === 1) return (
-        <p className={`comments-exist ${darkTheme ? 'dark-comments-exist' : ''}`}>
-            {`${descendants} comment`}
-        </p>
-    );
-
     return (
-        <p className={`comments-exist ${darkTheme ? 'dark-comments-exist' : ''}`} >
-           {`${descendants} comments`}
+        <p className={`comments-exist ${darkTheme ? 'dark-comments-exist' : ''}`}>
+            {`${descendants} comment${descendants > 1 ? 's' : ''}`}
         </p>
     );
 }

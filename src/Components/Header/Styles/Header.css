@@ -26,8 +26,8 @@
 #logo-wrapper {
     display: flex;
     align-self: center;
-    font-family: 'Gill Sans', sans-serif;
-    font-size: 18px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
     font-weight: bold;
     color: rgb(227, 232, 243);
     margin-left: 15px;
@@ -95,8 +95,8 @@
 .hamburger, 
 .hamburger::after, 
 .hamburger::before {
-    width: 32px;
-    height: 5px;
+    width: 35px;
+    height: 3px;
     background-color: rgb(241, 246, 255);
     transition: .4s ease;
     border-radius: 5px;
@@ -113,13 +113,13 @@
 
 .hamburger::after {
     content: '';
-    top: 220%;
+    top: 300%;
     position: absolute;
 }
 
 .hamburger::before {
     content: '';
-    top: -220%;
+    top: -300%;
     position: absolute;
 }
 
@@ -148,10 +148,14 @@
     }
 
     #logo-wrapper {
-        font-family: 'Impact', sans-serif;
-        font-size: 26px;
-        font-weight: normal;
-        letter-spacing: .06em;
+        font-family: 'Oswald', sans-serif;
+        font-size: 27px;
+        letter-spacing: .05em;
+        color: rgb(240, 254, 255);
+    }
+
+    #logo-wrapper > img {
+        margin-right: 15px;
     }
 }
 
