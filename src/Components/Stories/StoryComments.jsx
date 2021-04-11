@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StoryCommentsAndDetails } from './StoryCommentsAndDetails';
 import { getStory, getStoryComments } from '../../Api Calls/apiCalls';
 import { DarkThemeContext } from '../../Context/DarkThemeContext';
+import { usePreventSetStateOnUnmount } from '../../Hooks/usePreventSetStateOnUnmount';
 import { Link, useLocation } from 'react-router-dom';
 import './Styles/StoryComments.css';
 
@@ -21,19 +22,7 @@ export function StoryComments(props) {
 
     const { status, story } = storyWithComments;
 
-    //Prevents state update on an unmounted component:
-    const isMounted = useRef(true);
-
-    const abortController = new AbortController();
-
-    const abortSignal = abortController.signal;
-
-    useEffect(() => {
-        return () => {
-            isMounted.current = false;
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const { isMounted, abortController, abortSignal } = usePreventSetStateOnUnmount();
 
     useEffect(() => {
             getStory(storyId, abortSignal).then(res => 

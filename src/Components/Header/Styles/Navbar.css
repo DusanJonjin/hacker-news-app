@@ -44,7 +44,7 @@
     position: absolute;
     width: 0;
     height: 3px;
-    background-color: rgb(243, 250, 193);
+    background-color: rgb(249, 255, 208);
     right: 0;
     bottom: -80%;  
     opacity: 0;
@@ -63,8 +63,7 @@
 .nav-link {
     padding: 0 5px;
     text-decoration: none;
-    /*color: rgb(239, 249, 255);*/
-    color: rgb(243, 250, 193);
+    color: rgb(249, 255, 208);
     font-weight: bold;
     transition: .6s ease;
 }

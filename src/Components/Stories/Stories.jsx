@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StoriesList } from './StoriesList';
 import { Pagination } from './Pagination';
 import { FakeStoriesList } from '../- Placeholder Components -/FakeStoriesList';
 import { StoryComments } from './StoryComments';
 import { getStories } from '../../Api Calls/apiCalls';
+import { usePreventSetStateOnUnmount } from '../../Hooks/usePreventSetStateOnUnmount';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import './Styles/Stories.css';
 
@@ -35,24 +36,7 @@ export function Stories({ storiesApiName }) {
         setMidBtnsArr(array)
     };
 
-    /*Use this variable to prevent setting state on unmounted component, which
-    happens when a user quickly clicks on different links on the navbar :*/
-    const isMounted = useRef(true);
-
-    /*If the component is unmounted before getStories function gets its data,
-    we abort fetching data with Abort controler, also preventing state update: */ 
-    const abortController = new AbortController();
-
-    const abortSignal = abortController.signal;
-
-    // If a user quickly clicks or navigates between navbar links:
-    useEffect(() => {
-        return () => {
-            abortController.abort();
-            isMounted.current = false;
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const { isMounted, abortController, abortSignal } = usePreventSetStateOnUnmount();
 
     useEffect(() => {
         setStoriesData(initialStoriesData);
