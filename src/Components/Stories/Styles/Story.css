@@ -13,7 +13,7 @@
 
 /* story title link and short url part*/
 .story-top-wrap {
-    background: rgb(237, 245, 255);
+    background: rgb(244, 249, 255);
     border-radius: 3px;
     padding: 10px;
     word-wrap: break-word;
@@ -41,7 +41,7 @@
 }
 
 .dark-story-num {
-    color: rgb(125, 125, 128);
+    color: rgb(110, 110, 113);
 }
 
 .title-link {
@@ -106,7 +106,7 @@
 .small-wrap-two > p {
     margin: 0px 7px 0 0;
     padding: 6px 10px 5px 10px;
-    border-radius: 10px;
+    border-radius: 12px;
     background: rgb(255, 255, 255);
     transition: .5s ease;
 }

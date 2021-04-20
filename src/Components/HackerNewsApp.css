@@ -1,10 +1,10 @@
 body {
-    background-color: rgb(243, 243, 245);
+    background-color: rgb(240, 240, 242);
     transition: background-color .4s ease;
 }
 
 .app-wrapper {
-    background-color: rgb(243, 243, 245);
+    background-color: rgb(240, 240, 242);
     transition: background-color .5s ease;
 }
 

@@ -44,7 +44,7 @@
     position: absolute;
     width: 0;
     height: 3px;
-    background-color: rgb(249, 255, 208);
+    background-color:rgb(251, 255, 224);
     right: 0;
     bottom: -80%;  
     opacity: 0;
@@ -63,12 +63,12 @@
 .nav-link {
     padding: 0 5px;
     text-decoration: none;
-    color: rgb(249, 255, 208);
+    color:rgb(251, 255, 224);
     font-weight: bold;
     transition: .6s ease;
 }
 .nav-link:hover {
-    color: rgb(252, 244, 134);
+    color: rgb(253, 247, 161);
 }
 
 @media only screen and (min-width: 1340px) {
