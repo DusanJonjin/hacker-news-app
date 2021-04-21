@@ -18,7 +18,7 @@ export function Navbar({ sideMenuOpen, closeSideMenu, darkTheme }) {
                 to={{pathname: navLink.path}}
                 className='nav-link'
             >
-                {navLink.name}
+                {navLink.name.toUpperCase()}
             </Link>
         </li>
     );

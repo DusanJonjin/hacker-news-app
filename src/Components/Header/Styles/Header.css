@@ -29,11 +29,12 @@
     font-family: 'Oswald', sans-serif;
     font-size: 16px;
     font-weight: bold;
+    color: rgb(241, 250, 255);
     margin-left: 15px;
 }
 
 #logo-wrapper > img {
-    max-width: 50px;
+    max-width: 43px;
     display: block;
     margin-right: 10px;
 }
@@ -148,9 +149,8 @@
 
     #logo-wrapper {
         font-family: 'Oswald', sans-serif;
-        font-size: 27px;
+        font-size: 23px;
         letter-spacing: .05em;
-        color: rgb(240, 254, 255);
     }
 
     #logo-wrapper > img {
