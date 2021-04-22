@@ -20,7 +20,7 @@ export function Header() {
     return (
         <header className={`app-header ${darkTheme ? 'head-dark' : ''}`}>
             <div id='logo-wrapper'>
-                <img src={require('../../Images/hn-logo.png')}
+                <img src={require('../../Images/hn-logo.png').default}
                      alt='hacker-news-custom-logo'
                 />
                 Hacker News App

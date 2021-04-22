@@ -16,7 +16,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    color: rgb(121, 134, 138);
+    color: rgb(110, 124, 131);
     font-family: 'Oswald', sans-serif;
     font-size: 16px;
     font-weight: bold;
@@ -26,13 +26,17 @@
 }
 
 .story-comm-top-wrap-dark {
-    color: rgb(112, 131, 141);
+    color: rgb(138, 154, 163);
 }
    
 .story-comment-top-wrap p {
    margin: 0;
 }
 
+.story-comment-top-wrap p:first-child {
+    text-decoration: underline;
+ }
+ 
 .story-comment-bot-wrap {
     font-family: 'Roboto', sans-serif;
     padding-bottom: 12px;
