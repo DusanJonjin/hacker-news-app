@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryDetails } from './StoryDetails';
 import { StoryCommentsList } from './StoryCommentsList';
-import { CommentsCount } from '../- Joint Components -/CommentsCount';
+import { CommentsCount, Text } from '../- Joint Components -/AllJointComponents';
 import { FakeCommentsList } from '../- Placeholder Components -/FakeCommentsList';
 import { useState } from 'react';
 
@@ -33,6 +33,11 @@ export function StoryCommentsAndDetails({ darkTheme, storyWithComments }) {
                 story={story}
                 darkTheme={darkTheme}
             />
+            {story.text &&
+                <div className='details-comments-text'>
+                    <Text text={story.text} />
+                </div>
+            }
             <CommentsCount 
                 descendants={story.descendants} 
             />

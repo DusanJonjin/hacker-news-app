@@ -21,12 +21,13 @@ export function Stories({ storiesApiName }) {
     // eslint-disable-next-line no-unused-vars
     const [storiesPerPage, setStoriesPerPage] = useState(20);
 
-    // Initial array of numbers for middle paginate buttons:
-    const [midBtnsArr, setMidBtnsArr] = useState(
-        Array.from(
-            {length: 5}, (v ,i) => i + 2
-        )
-    );
+    const [midBtnsArr, setMidBtnsArr] = useState([]);
+
+    const initialBtnsArr = storiesCount => {
+        const pagesCount = Math.ceil(storiesCount / storiesPerPage);
+        if (pagesCount < 8) return Array.from({length: pagesCount}, (v, i) => i + 1);
+        return Array.from({length: 5}, (v, i) => i + 2);
+    }
 
     const handleSelectPageNum = num => {
         setPageNum(num);
@@ -46,7 +47,11 @@ export function Stories({ storiesApiName }) {
             pageNum, 
             storiesPerPage
         ).then(res => 
-            isMounted.current && setStoriesData(res)
+            isMounted.current && (
+                setStoriesData(res), 
+                midBtnsArr.length < 1 && 
+                setMidBtnsArr(initialBtnsArr(res.storiesCount))
+            )
         ); 
         window.scrollTo(0, 0);
         // If a user quickly clicks on a paginate button and then some nav link:

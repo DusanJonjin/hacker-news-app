@@ -15,7 +15,11 @@ export function Pagination(
 
     const lastPageNum = Math.ceil(storiesCount / storiesPerPage);
 
-    const midBtnsCount = 5;
+    const firstMidBtnNum = midBtnsArr[0];
+
+    const lastMidBtnNum = midBtnsArr[midBtnsArr.length - 1]
+
+    const midBtnsCount = midBtnsArr.length;
 
     const initialBtnsArr = Array.from(
         {length: midBtnsCount}, (v ,i) => i + 2
@@ -41,8 +45,7 @@ export function Pagination(
     ;
 
     const increaseMidBtnsArrValues = () => {
-    //if the last value in midBtnsArr is equal to second to last page num do nothing:
-        if (midBtnsArr[midBtnsArr.length - 1] === lastPageNum - 1) return;
+        if (lastMidBtnNum === lastPageNum - 1) return;
         const increasedArrValues = midBtnsArr.map(num => 
             num + numToChangeMidBtnsArr
         );
@@ -50,7 +53,7 @@ export function Pagination(
     };
 
     const decreaseMidBtnsArrValues = () => {
-        if (midBtnsArr[0] === firstPageNum + 1) return;
+        if (firstMidBtnNum === firstPageNum + 1) return;
         const decreasedArrValues = midBtnsArr.map(num => 
             num - numToChangeMidBtnsArr
         );
@@ -59,8 +62,10 @@ export function Pagination(
 
     const handlePaginateBtnClick = (num, i, arr) => {
         if (num === pageNum) return;
-        if (i === 0) decreaseMidBtnsArrValues();
-        if (i === arr.length - 1) increaseMidBtnsArrValues();
+        if (firstMidBtnNum !== 1) {
+            if (i === 0) decreaseMidBtnsArrValues();
+            if (i === arr.length - 1) increaseMidBtnsArrValues();
+        }
         handleSelectPageNum(num);
     };
 
@@ -75,35 +80,45 @@ export function Pagination(
     );
 
     const displayThreeDots = {
-        onStart: midBtnsArr[0] !== firstPageNum + 1,
-        onEnd: midBtnsArr[midBtnsArr.length - 1] !== lastPageNum - 1
+        onStart: firstMidBtnNum !== firstPageNum + 1,
+        onEnd: lastMidBtnNum !== lastPageNum - 1
     }
+
+    const showFirstLastPageBtn = firstMidBtnNum > 1
 
     return (
         <div className={`pagination`}>
-            <p 
-                onClick={handleFirstPageNumSelect}
-                className={`pagin-numbers ${pageNum === firstPageNum ? 'pagin-num-selected' : ''}`}
-            >
-                {firstPageNum}
-            </p>
-            {
-                displayThreeDots.onStart && 
-                    <p className='three-dots'>...</p>
+            {showFirstLastPageBtn &&
+                <React.Fragment>
+                    <p 
+                        onClick={handleFirstPageNumSelect}
+                        className={`pagin-numbers ${pageNum === firstPageNum ? 'pagin-num-selected' : ''}`}
+                    >
+                        {firstPageNum}
+                    </p>
+                    {
+                        displayThreeDots.onStart && 
+                            <p className='three-dots'>...</p>
+                    }
+                </React.Fragment>
             }
             <ol className='pagination-ol'>
                 {paginationBtns}
             </ol>
-            {
-                displayThreeDots.onEnd && 
-                    <p className='three-dots'>...</p>
+            {showFirstLastPageBtn &&
+                <React.Fragment>
+                    {
+                        displayThreeDots.onEnd && 
+                            <p className='three-dots'>...</p>
+                    }
+                    <p 
+                        onClick={handleLastPageNumSelect}
+                        className={`pagin-numbers ${pageNum === lastPageNum ? 'pagin-num-selected' : ''}`}
+                    >
+                        {lastPageNum}
+                    </p>
+                </React.Fragment>
             }
-            <p 
-                onClick={handleLastPageNumSelect}
-                className={`pagin-numbers ${pageNum === lastPageNum ? 'pagin-num-selected' : ''}`}
-            >
-                {lastPageNum}
-            </p>
         </div>
     )
 }

@@ -1,16 +1,31 @@
 export const navLinksDataArr = [
     {   
-        name:'Top stories',
+        name:'Top',
         path: '/top_stories',
         api: 'topstories'
     }, 
     {
-        name: 'New stories',
+        name: 'New',
         path:'/new_stories',
         api: 'newstories'
     }, 
     {
-        name: 'All comments',
+        name: 'Comments',
         path: '/all_comments'
+    },
+    {   
+        name:'Ask',
+        path: '/ask_stories',
+        api: 'askstories'
+    }, 
+    {   
+        name:'Show',
+        path: '/show_stories',
+        api: 'showstories'
+    },  
+    {   
+        name:'Jobs',
+        path: '/jobs_stories',
+        api: 'jobstories'
     }
 ];

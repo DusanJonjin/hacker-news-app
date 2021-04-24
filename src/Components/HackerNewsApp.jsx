@@ -16,7 +16,7 @@ function HackerNewsApp() {
     different paths inside Switch, that component will not unmount on Route change
     between them, it will always be mounted but with different props: */
     const storiesRoutes = navLinksDataArr.reduce((acc, navLink, i) => 
-        navLink.name !== 'All comments' ?
+        navLink.name !== 'Comments' ?
             [
                 ...acc,
                 <Route key={i} path={navLink.path}>
