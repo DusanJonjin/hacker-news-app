@@ -51,7 +51,7 @@ export function StoryComments(props) {
                     to={`/${storiesType}_stories`}
                     className={`story-comments-link`}
                 >
-                    &lt;Back to {storiesType} stories
+                    &lt; Back to {storiesType} stories
                 </Link>
             </p>
             {
