@@ -46,7 +46,7 @@
 
 .fake-story-bottom {
     width: 60%;
-    height: 35px;
+    height: 36px;
     margin: 19px 10px;
     background-color: rgb(171, 203, 216);
     transition: .5s ease;
@@ -59,6 +59,10 @@
 @media only screen and (min-width: 1344px) {
     .fake-story-top {
         height: 93px;
+    }
+
+    .fake-story-bottom {
+        margin: 15px 10px;
     }
 
 }
