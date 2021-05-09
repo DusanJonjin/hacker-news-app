@@ -26,7 +26,7 @@
 
 .story-top-wrap > h2 {
     font-family: 'Open-sans', sans-serif;
-    font-size: 18px;
+    font-size: 17px;
     margin: 0;
 }
 
@@ -64,7 +64,7 @@
 
 .short-url {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: .03em;
     margin: 10px 0 0 0;
     font-weight: bold;
@@ -86,9 +86,8 @@
     letter-spacing: .03em;
     display: flex;
     flex-direction: column;
-    padding: 12px 0;
+    padding: 7px 0;
     color: rgb(81, 81, 83);
-    /*margin: 10px 0 0 0;*/
     transition: .5s ease;
 }
 
@@ -99,13 +98,13 @@
 .small-wrap-one, .small-wrap-two {
     display: flex;
     align-items: center;
-    margin: .5em 0;
+    margin: .35em 0;
 }
 
 .small-wrap-one > p,
 .small-wrap-two > p {
-    margin: 0px 7px 0 0;
-    padding: 6px 10px 5px 10px;
+    margin: 0 7px 0 0;
+    padding: 4px 10px 3px 10px;
     border-radius: 12px;
     background: rgb(255, 255, 255);
     transition: .5s ease;
@@ -183,12 +182,18 @@
 
     .story-bottom-wrap {
         flex-direction: row;
+        padding: 10px 0;
+    }
+
+    .small-wrap-one, .small-wrap-two {
+        margin: .5em 0;
     }
 
     .small-wrap-one > p,
     .small-wrap-two > p{
         /*2002 is unicode for two white spaces (same as &ensp;)*/
         margin: 3px 7px 3px 0;
+        padding: 5px 10px 4px 10px;
     }
 }
 
