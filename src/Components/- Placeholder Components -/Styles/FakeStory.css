@@ -4,7 +4,7 @@
     height: 110px;
     background: rgb(233, 248, 255);
     border-radius: 3px;
-    margin: 34px auto 0px auto;
+    margin: 30px auto 0px auto;
     position: relative;
     transition: .5s ease;
     z-index: 1;
@@ -46,7 +46,7 @@
 
 .fake-story-bottom {
     width: 60%;
-    height: 36px;
+    height: 31px;
     margin: 19px 10px;
     background-color: rgb(171, 203, 216);
     transition: .5s ease;
@@ -58,7 +58,7 @@
 
 @media only screen and (min-width: 1344px) {
     .fake-story-top {
-        height: 93px;
+        height: 94px;
     }
 
     .fake-story-bottom {

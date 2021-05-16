@@ -13,6 +13,7 @@
 
 /* story title link and short url part*/
 .story-top-wrap {
+    font-family: 'Open Sans', sans-serif;
     background: rgb(244, 249, 255);
     border-radius: 3px;
     padding: 10px;
@@ -25,8 +26,7 @@
 }
 
 .story-top-wrap > h2 {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 17px;
+    font-size: 16px;
     margin: 0;
 }
 
@@ -66,7 +66,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
     letter-spacing: .03em;
-    margin: 10px 0 0 0;
+    margin: 8px 0 0 0;
     font-weight: bold;
     color: rgb(75, 75, 78);
     transition: .5s ease;
@@ -165,24 +165,24 @@
 @media only screen and (min-width: 1340px) {
 
     .story-top-wrap > h2 {
-        height: 55px;
-        font-size: 18px;
+        height: 53px;
+        font-size: 17px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
     .story-num {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .short-url {
         margin: 0;
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .story-bottom-wrap {
         flex-direction: row;
-        padding: 10px 0;
+        padding: 8px 0;
     }
 
     .small-wrap-one, .small-wrap-two {
