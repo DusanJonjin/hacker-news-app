@@ -25,9 +25,12 @@
 }
 
 .story-top-wrap > h2 {
-    font-family: 'Open-sans', sans-serif;
     font-size: 17px;
     margin: 0;
+}
+
+.story-top-wrap a {
+    font-family: 'Open-sans', sans-serif;
 }
 
 .story-num {
