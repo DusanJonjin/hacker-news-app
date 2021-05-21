@@ -34,6 +34,8 @@ export function Story({ storyObj, storyNum }) {
 
     const urlShort = handleLongUrl(url);
 
+    const noComments = descendants < 1 || !descendants;
+
     return (
         <article className={`story ${darkTheme ? 'dark-story' : ''}`}>
             <p className={`story-num ${darkTheme ? 'dark-story-num' : ''}`}>
@@ -62,7 +64,7 @@ export function Story({ storyObj, storyNum }) {
                     <TimeAgo time={time} />                  
                     <Link 
                         to={storyCommentsLink} 
-                        className={`story-comments-link ${descendants < 1 ? 'link-disabled' : '' }`}>
+                        className={`story-comments-link ${noComments ? 'link-disabled' : '' }`}>
                         <CommentsCount 
                             descendants={descendants}
                             darkTheme={darkTheme}
