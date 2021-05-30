@@ -16,7 +16,7 @@
     font-family: 'Open Sans', sans-serif;
     background: rgb(244, 249, 255);
     border-radius: 3px;
-    padding: 10px;
+    padding: 5px 8px;
     word-wrap: break-word;
     transition: .5s ease;
 }
@@ -32,7 +32,7 @@
 
 .story-num {
     margin: 0 5px 0 0;
-    padding: 5px 0;
+    padding: 3px 0;
     font-size: 16px;
     color: rgb(114, 119, 131);
     text-align: right;
@@ -41,7 +41,7 @@
 }
 
 .dark-story-num {
-    color: rgb(110, 110, 113);
+    color: rgb(130, 130, 133);
 }
 
 .title-link {
@@ -164,6 +164,10 @@
 
 @media only screen and (min-width: 1340px) {
 
+    .story-top-wrap {
+        padding: 10px 10px;
+    }
+
     .story-top-wrap > h2 {
         height: 53px;
         font-size: 17px;
@@ -173,6 +177,7 @@
 
     .story-num {
         font-size: 17px;
+        padding: 5px 0;
     }
 
     .short-url {
